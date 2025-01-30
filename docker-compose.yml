@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_DB: estoquebd
+      POSTGRES_USER: usuario  
+      POSTGRES_PASSWORD: coti 
+    ports:
+      - "5436:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql17/data
+    networks:
+      - rede-estoque
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      - rede-estoque
+
+volumes:
+  postgres_data:
+
+networks:
+  rede-estoque:
+    driver: bridge
